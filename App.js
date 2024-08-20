@@ -1,20 +1,46 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import 'react-native-gesture-handler';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {NavigationContainer} from "@react-navigation/native";
+import {createStackNavigator} from "@react-navigation/stack";
+// import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import {createMaterialBottomTabNavigator} from "react-native-paper/react-navigation";
+import HomeScreen from "./src/screens/viaBottomTab/homeScreen";
+import MapScreen from "./src/screens/viaBottomTab/mapScreen";
+import SetScreen from "./src/screens/viaBottomTab/setScreen";
+import ListScreen from "./src/screens/viaStack/listScreen";
+// import StackNav from "./src/screens/StackNav";
 
-export default function App() {
+const Tab = createMaterialBottomTabNavigator()
+const Stack = createStackNavigator()
+
+function TabNav() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+  <Tab.Navigator>
+    <Tab.Screen name="HomeScreen" component={HomeScreen}/>
+      <Tab.Screen name="StackNav" component={StackNav}/>
+    <Tab.Screen name="SetScreen" component={SetScreen}/>
+  </Tab.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+function StackNav() {
+  return ( //listscreen should be reached through button on the mapscreen
+      <Stack.Navigator>
+          <Stack.Screen name="MapScreen" component={MapScreen}/>
+          <Stack.Screen name="ListScreen" component={ListScreen}/>
+      </Stack.Navigator>
+  )
+}
+
+const App = () => {
+  return (
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <TabNav/>
+        </NavigationContainer>
+      </SafeAreaProvider>
+          );
+};
+
+export default App;
