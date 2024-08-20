@@ -17,14 +17,14 @@ const Stack = createStackNavigator()
 function TabNav() {
   return (
   <Tab.Navigator>
-    <Tab.Screen name="HomeScreen" component={HomeScreen}/>
-      <Tab.Screen name="StackNav" component={StackNav}/>
-    <Tab.Screen name="SetScreen" component={SetScreen}/>
+    <Tab.Screen name="Home" component={HomeScreen}/>
+      <Tab.Screen name="Oases" component={OasesNav}/>
+    <Tab.Screen name="Settings" component={SetScreen}/>
   </Tab.Navigator>
   );
 }
 
-function StackNav() {
+function OasesNav() {
   return ( //listscreen should be reached through button on the mapscreen
       <Stack.Navigator>
           <Stack.Screen name="MapScreen" component={MapScreen}/>

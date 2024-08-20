@@ -1,82 +1,74 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Pressable, SafeAreaView, Image } from 'react-native';
+import { Text, StyleSheet, Pressable, SafeAreaView, Image } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 import { Accuracy } from 'expo-location';
+// Custom hook to load location data
 import useLoadingData from '../../hooks/loadLocationData';
+// Icon for the user's location marker
 import trackerIcon from '../../../assets/img/trackerIcon.png';
-import listItemIcon from '../../../assets/img/ListItemIcon.png';
+// Icon for oase location markers
 import ItemIcon from '../../../assets/img/Location.png';
 
 const MapScreen = ({ navigation }) => {
-    const locationData = useLoadingData();
-    const [location, setLocation] = useState(null);
-    const [errorMsg, setErrorMSG] = useState(null);
+    const locationData = useLoadingData(); // To store location data
+    const [location, setLocation] = useState(null); // Load data using custom hook
+    const [errorMsg, setErrorMsg] = useState(null); // State for any user location-related error messages
 
-    // Ask permission for user's location
+
+    // Effect to ask permission for and get user's location
     useEffect(() => {
         const getLocation = async () => {
+            // Request permission to access location
             let { status } = await Location.requestForegroundPermissionsAsync();
-            if (status !== 'granted') {
+            if (status !== 'granted') { // If permission is not granted, set an error message
                 setErrorMsg('Permission to access location was denied');
-            } else {
-                await Location.watchPositionAsync({ accuracy: Accuracy.Balanced }, (coords) => {
-                    setLocation(coords);
-                });
+            } else { // Else start watching the user's location
+                await Location.watchPositionAsync(
+                    { accuracy: Accuracy.Balanced }, // Set accuracy level for location updates
+                    (coords) => {setLocation(coords); // Update location state with the new coordinates
+                    });
             }
         };
-        getLocation();
-    }, []);
+        getLocation();  // Call the function to get location
+    }, []); // Empty dependency array means this effect runs once on component mount
 
+    if (errorMsg) { // If there is an error, log it to the console
+        console.log(errorMsg);
+    } else if (location) { // If location is available, log the location data
+        console.log(JSON.stringify(location));
+    }
+
+    // Ensure locationData is an array before mapping through it
     const filteredLocationData = Array.isArray(locationData) ? locationData : [];
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <View style={styles.card}>
-                <Text style={styles.title}>{listItem.Title}</Text>
-                <Text style={styles.subtitle}>This is a {listItem.category} in {listItem.neighbourhood}</Text>
-                <Text style={styles.description}>{listItem.shortDescription}</Text>
-                <Image source={listItemIcon} style={styles.logotop} />
-            </View>
             <MapView
                 provider={PROVIDER_GOOGLE}
                 style={{ flex: 1 }}
                 initialRegion={{
-                    latitude: 51.9244,
-                    longitude: 4.462456,
-                    latitudeDelta: 0.0922,
-                    longitudeDelta: 0.0421,
+                    latitude: 51.9244, // Default latitude for initial map position
+                    longitude: 4.462456, // Default longitude for initial map position
+                    latitudeDelta: 0.0922, // Zoom level for latitude
+                    longitudeDelta: 0.0421,  // Zoom level for longitude
                 }}
             >
                 {location && (
-                    <Marker
+                    <Marker // Marker for user location
                         tappable={true}
                         title="Hier ben jij"
                         coordinate={{
-                            latitude: location.coords.latitude,
-                            longitude: location.coords.longitude,
+                            latitude: location.coords.latitude, // Latitude from current user location
+                            longitude: location.coords.longitude, // Longitude from current user location
                         }}
                     >
                         <Image source={trackerIcon} style={styles.trackerIcon} />
                     </Marker>
                 )}
 
-                {listItem && (
-                    <Marker
-                        tappable={true}
-                        title={listItem.Title}
-                        description={listItem.shortDescription}
-                        coordinate={{
-                            latitude: listItem.latitude,
-                            longitude: listItem.longitude,
-                        }}
-                    >
-                        <Image source={listItemIcon} style={styles.trackerIcon} />
-                    </Marker>
-                )}
-
                 {filteredLocationData.map((item) => (
-                    <Marker
+                    <Marker // Loading location data into map with title and description
                         key={item.id}
                         tappable={true}
                         title={item.Title}
@@ -92,6 +84,7 @@ const MapScreen = ({ navigation }) => {
             </MapView>
 
             <Text>Map Screen</Text>
+            {/*Button to go to list view*/}
             <Pressable onPress={() => navigation.navigate('ListScreen')} style={styles.press}>
                 <Text>List Screen</Text>
             </Pressable>
@@ -107,10 +100,6 @@ const styles = StyleSheet.create({
     ItemIcon: {
         width: 20,
         height: 30,
-    },
-    logotop: {
-        width: 50,
-        height: 50,
     },
     card: {
         padding: 16,
