@@ -3,11 +3,40 @@ import { Text, StyleSheet, Pressable, ScrollView, View, Image, ActivityIndicator
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 import useLoadingData from '../../hooks/loadLocationApi'; // Custom hook to load location data
 import Location from '../../../assets/img/Location.png'
-import {AsyncStorage} from 'react-native';
-
+import favSelect from '../../../assets/img/favSelect.png';
+import fav from '../../../assets/img/fav.png';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import setFavourites from "../../asyncStorage/setFavourites";
+import getFavourites from "../../asyncStorage/getFavourites";
+import pushFavourite from "../../asyncStorage/pushFavourite";
+import deleteFavourite from "../../asyncStorage/deleteFavourite";
 
 const ListScreen = ({ navigation, route }) => {
     const oases = useLoadingData(); // Load location data using the custom hook
+    const [favourites, setFavourites] = useState([]);
+
+    useEffect(() => {
+        const fetchFavourites = async () => {
+            const oases = await getFavourites();
+            setFavourites(oases);
+        };
+
+        fetchFavourites();
+    }, []);
+
+    const handleFavourite = async (oase) => {
+        await pushFavourite(oase);
+        setFavourites(await getFavourites());
+    };
+
+    const handleUnfavourite = async (oaseId) => {
+        await deleteFavourite(oaseId);
+        setFavourites(await getFavourites());
+    };
+
+    const isFavorite = (oase) => {
+        return favourites.some(fav => fav.id === oase.id);
+    };
 
     // If the data is still loading (empty array), show a loading indicator
     if (oases.length === 0) {
@@ -23,18 +52,25 @@ const ListScreen = ({ navigation, route }) => {
     return (<View style={styles.container}>
         <ScrollView style={styles.scroll}>
             {oases.map((item, index) => {
+                const isItemFavorite = isFavorite(item);
                 return (
                     <View key={index} style={styles.card}>
                         <View style={styles.logos}>
                             <Image source={require('../../../assets/img/park.png')} style={styles.logo} />
+                            <Pressable style={styles.button}
+                                       onPress={() => {
+                                           isItemFavorite ? handleUnfavourite(item.id) : handleFavourite(item);
+                                       }}>
+                                <Image source={isItemFavorite ? favSelect : fav} style={styles.star} />
+                            </Pressable>
                         </View>
                         <Text style={styles.title}>{item.Title}</Text>
                         <Text style={styles.subtitle}>This is a {item.category} in {item.neighbourhood}</Text>
                         <Text style={styles.description}>{item.description}</Text>
                         <Text style={styles.location}> Location: ({item.latitude}, {item.longitude})</Text>
                         <Pressable style={styles.button} onPress={() => navigation.navigate('MapScreen', { listItem: item })}>
-                            <Text style={styles.buttonText}>Ga naar de kaart!</Text>
-                            <Image source={Location} style={styles.loclogo}/>
+                            <Text style={styles.buttonText}>Zie oase op de kaart --></Text>
+                            <Image source={Location} style={styles.oaseLogo}/>
                         </Pressable>
                     </View>
                 );
@@ -114,7 +150,7 @@ const styles = StyleSheet.create({
         flex: 2,
         marginRight: "auto",
     },
-    loclogo: {
+    oaseLogo: {
         width: 14,
         height: 21,
         margin: 5,
