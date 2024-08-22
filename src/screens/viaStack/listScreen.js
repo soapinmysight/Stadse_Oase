@@ -4,7 +4,7 @@ import { Text, StyleSheet, Pressable, ScrollView, View, Image, ActivityIndicator
 import useLoadingData from '../../hooks/loadLocationData'; // Custom hook to load location data
 import Location from '../../../assets/img/Location.png'
 
-const ListScreen = ({ navigation }) => {
+const ListScreen = ({ navigation, route }) => {
     const oases = useLoadingData(); // Load location data using the custom hook
 
     // If the data is still loading (empty array), show a loading indicator
@@ -17,38 +17,20 @@ const ListScreen = ({ navigation }) => {
             </View>
         );
     }
-
+    // In a scrollable container: for each item in the oases array, create a card to display its details
     return (<View style={styles.container}>
-        <ScrollView style={styles.scroll}>  {/* Scrollable container for the list */}
-            {oases.map((item, index) => { // For each item in the oases array, create a card to display its details
-                // const isFavorite = favorites.includes(item.Title);
+        <ScrollView style={styles.scroll}>
+            {oases.map((item, index) => {
                 return (
-                    <View key={index} style={styles.card}> {/* Card for each location */}
-                        <View style={styles.logos}> {/* Container for the logo and potential favorite icon */}
+                    <View key={index} style={styles.card}>
+                        <View style={styles.logos}>
                             <Image source={require('../../../assets/img/park.png')} style={styles.logo} />
-                            {/*<Pressable*/}
-                            {/*    style={styles.button}*/}
-                            {/*    onPress={() => storeFav(item, (fav) => {*/}
-                            {/*        if (fav) {*/}
-                            {/*            setFavorites([...favorites, item.Title]);*/}
-                            {/*        } else {*/}
-                            {/*            setFavorites(favorites.filter(title => title !== item.Title));*/}
-                            {/*        }*/}
-                            {/*    })}*/}
-                            {/*>*/}
-                            {/*    <Image source={isFavorite ? favSelect : fav} style={styles.star} />*/}
-                            {/*</Pressable>*/}
-                        </View> {/*Display location information in a card*/}
+                        </View>
                         <Text style={styles.title}>{item.Title}</Text>
                         <Text style={styles.subtitle}>This is a {item.category} in {item.neighbourhood}</Text>
                         <Text style={styles.description}>{item.description}</Text>
-                        <Text style={styles.location}>
-                            Location: ({item.latitude}, {item.longitude})
-                        </Text>
-                        {/*Button for handing navigation towards the card*/}
-                        <Pressable style={styles.button}
-                                   onPress={() => handleNavigation( item)}
-                        >
+                        <Text style={styles.location}> Location: ({item.latitude}, {item.longitude})</Text>
+                        <Pressable style={styles.button} onPress={() => navigation.navigate('MapScreen', { listItem: item })}>
                             <Text style={styles.buttonText}>Ga naar de kaart!</Text>
                             <Image source={Location} style={styles.loclogo}/>
                         </Pressable>
@@ -134,6 +116,14 @@ const styles = StyleSheet.create({
         width: 14,
         height: 21,
         margin: 5,
+    },
+    press: {
+        height: 50,
+        width: 150,
+        backgroundColor: 'red',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
     },
 });
 

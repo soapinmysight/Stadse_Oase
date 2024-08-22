@@ -9,12 +9,16 @@ import useLoadingData from '../../hooks/loadLocationData';
 import trackerIcon from '../../../assets/img/trackerIcon.png';
 // Icon for oase location markers
 import ItemIcon from '../../../assets/img/Location.png';
+// Icon for oase location, selected via list.
+import listItemIcon from '../../../assets/img/ListItemIcon.png';
 
-const MapScreen = ({ navigation }) => {
+
+const MapScreen = ({ navigation, route }) => {
     const locationData = useLoadingData(); // To store location data
     const [location, setLocation] = useState(null); // Load data using custom hook
     const [errorMsg, setErrorMsg] = useState(null); // State for any user location-related error messages
-
+    const listItem = route.params?.listItem; // If key "listItem" exists, access value (item) from route.params, and give it the name "listItem"
+    console.log(`this is the ListItem${listItem}`)
 
     // Effect to ask permission for and get user's location
     useEffect(() => {
@@ -39,8 +43,9 @@ const MapScreen = ({ navigation }) => {
         console.log(JSON.stringify(location));
     }
 
-    // Ensure locationData is an array before mapping through it
-    const filteredLocationData = Array.isArray(locationData) ? locationData : [];
+    const filteredLocationData = Array.isArray(locationData)
+        ? (listItem ? locationData.filter((item) => item.id !== listItem.id) : locationData)
+        : [];
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -66,6 +71,20 @@ const MapScreen = ({ navigation }) => {
                         <Image source={trackerIcon} style={styles.trackerIcon} />
                     </Marker>
                 )}
+
+                {listItem ? (
+                    <Marker
+                        tappable={true}
+                        title={listItem.Title}
+                        description={listItem.shortDescription}
+                        coordinate={{
+                            latitude: listItem.latitude,
+                            longitude: listItem.longitude,
+                        }}
+                    >
+                        <Image source={listItemIcon} style={styles.trackerIcon} />
+                    </Marker>
+                ) : null}
 
                 {filteredLocationData.map((item) => (
                     <Marker // Loading location data into map with title and description
