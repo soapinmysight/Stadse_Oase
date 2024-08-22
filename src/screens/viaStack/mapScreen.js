@@ -4,7 +4,7 @@ import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 import { Accuracy } from 'expo-location';
 // Custom hook to load location data
-import useLoadingData from '../../hooks/loadLocationData';
+import useLoadingData from '../../hooks/loadLocationApi';
 // Icon for the user's location marker
 import trackerIcon from '../../../assets/img/trackerIcon.png';
 // Icon for oase location markers

@@ -6,7 +6,7 @@ import {createStackNavigator} from "@react-navigation/stack";
 // import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {createMaterialBottomTabNavigator} from "react-native-paper/react-navigation";
 import HomeScreen from "./src/screens/viaBottomTab/homeScreen";
-import MapScreen from "./src/screens/viaBottomTab/mapScreen";
+import MapScreen from "./src/screens/viaStack/mapScreen";
 import SetScreen from "./src/screens/viaBottomTab/setScreen";
 import ListScreen from "./src/screens/viaStack/listScreen";
 // import StackNav from "./src/screens/StackNav";

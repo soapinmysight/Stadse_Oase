@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Text, StyleSheet, Pressable, ScrollView, View, Image, ActivityIndicator } from 'react-native';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
-import useLoadingData from '../../hooks/loadLocationData'; // Custom hook to load location data
+import useLoadingData from '../../hooks/loadLocationApi'; // Custom hook to load location data
 import Location from '../../../assets/img/Location.png'
+import {AsyncStorage} from 'react-native';
+
 
 const ListScreen = ({ navigation, route }) => {
     const oases = useLoadingData(); // Load location data using the custom hook
