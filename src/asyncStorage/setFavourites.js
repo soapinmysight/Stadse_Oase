@@ -15,4 +15,4 @@ const setFavourites = async (favourites) => {
     }
 };
 
-export default setFavourites()
+export default setFavourites;

@@ -20,4 +20,4 @@ const deleteFavourite = async (oaseId) => {
     }
 };
 
-export default deleteFavourite
+export default deleteFavourite;

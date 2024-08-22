@@ -19,4 +19,4 @@ const pushFavourite = async (newFavOase) => {
     }
 };
 
-export default pushFavourite()
+export default pushFavourite;

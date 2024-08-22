@@ -13,12 +13,12 @@ import deleteFavourite from "../../asyncStorage/deleteFavourite";
 
 const ListScreen = ({ navigation, route }) => {
     const oases = useLoadingData(); // Load location data using the custom hook
-    const [favourites, setFavourites] = useState([]);
+    const [favouritesState, setFavouritesState] = useState([]);
 
     useEffect(() => {
         const fetchFavourites = async () => {
             const oases = await getFavourites();
-            setFavourites(oases);
+            setFavouritesState(oases);
         };
 
         fetchFavourites();
@@ -26,16 +26,16 @@ const ListScreen = ({ navigation, route }) => {
 
     const handleFavourite = async (oase) => {
         await pushFavourite(oase);
-        setFavourites(await getFavourites());
+        setFavouritesState(await getFavourites());
     };
 
     const handleUnfavourite = async (oaseId) => {
         await deleteFavourite(oaseId);
-        setFavourites(await getFavourites());
+        setFavouritesState(await getFavourites());
     };
 
     const isFavorite = (oase) => {
-        return favourites.some(fav => fav.id === oase.id);
+        return favouritesState.some(fav => fav.id === oase.id);
     };
 
     // If the data is still loading (empty array), show a loading indicator
