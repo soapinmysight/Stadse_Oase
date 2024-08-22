@@ -1,0 +1,152 @@
+notes on & references for these subjects:
+    -->     REACT NATIVE
+    -->     MAP & LOCATION
+    -->     MAKING A LOCATION API TO LOAD INTO MAP
+    -->     DATA PERSISTENCE (ASYNC & DATABASE STORAGE)
+    -->     FOR ADDING SPECIAL/INTERESTING FEATURES
+    -->     STYLING
+
+github hr-cmgt prg07: https://github.com/HR-CMGT/PRG07-2023-2024
+
+----------------------------------------------------------------
+REACT NATIVE
+----------------------------------------------------------------
+    React Native is a framework build for app-development. It is based of and meant to be used with the React library. React Native has many libraries, for adding functionalities that work with the framework. For example, their library for navigation.
+    https://reactnative.dev/docs/environment-setup
+
+    -->	usestate
+        -instead of variables
+        -when the usestate changes (is set), react knows this and automatically reloads
+        documentation used in theory week 4: https://legacy.reactjs.org/docs/hooks-state.html
+        up-to-date documentation: https://react.dev/reference/react/useState
+
+    -->	components
+        -to make parts of code reusable
+        -often for ui. for simple ux: add props. for back-end and functionalities: add use-effect
+        -renders individually
+        -props: lets you customize components
+        components: https://react.dev/learn/your-first-component
+        props: https://react.dev/learn/passing-props-to-a-component
+
+    -->	use effect
+        useEffect is a React Hook that lets you synchronize a component with an external system (see: effects)
+        -use effect use-cases: Add a button's event listener, Data retrieval from the API during component mounting, Perform an action when state or props change.
+        to handle side effects in functional components
+        -pay attention to reactive variables! (?)
+        use effect documentation used in theory week 4: https://react.dev/reference/react/useEffect
+        use effect up-to-date documentation: https://react.dev/reference/react/useEffect
+        effects(?): https://react.dev/learn/synchronizing-with-effects
+
+    -->	navigation
+        Routing and navigation for Expo and React Native apps.
+        -there are different types
+        https://reactnavigation.org/docs/getting-started/
+
+    --> nested navigation
+        Nesting navigators means rendering a navigator inside a screen of another navigator
+        docs nested navigation: https://reactnavigation.org/docs/nesting-navigators/
+        tutorial: https://www.youtube.com/watch?v=PO5P0EscvFI
+
+
+
+    -->bottom tabs navigator
+        styling ref: https://dhruvpvx.medium.com/stop-using-the-default-boilerplate-for-creating-bottom-tab-icons-in-react-native-use-this-instead-c24d34f28b92
+        source: https://callstack.github.io/react-native-paper/docs/guides/bottom-navigation
+        snippet:
+            import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
+
+            const Tab = createMaterialBottomTabNavigator();
+
+            function MyTabs() {
+              return (
+                <Tab.Navigator>
+                  <Tab.Screen name="Home" component={HomeScreen} />
+                  <Tab.Screen name="Settings" component={SettingsScreen} />
+                </Tab.Navigator>
+              );
+            }
+
+
+    -->	listsview in react native
+        -could be nice for list view of map
+        -issue: listview has a standard size
+        -solution: use scrollview, and use safeareaview to limit size of scrollview,
+        -although with scrollview renders everything while listview only renders what becomes visible.
+        listview: https://reactnative.dev/docs/using-a-listview
+
+----------------------------------------------------------------
+MAP & LOCATION
+----------------------------------------------------------------
+    -->	React Native google maps api step by step:
+        https://medium.com/featurepreneur/integrating-google-maps-with-react-native-62fc8b7ecded
+
+    -->	expo mapview documentation
+        https://docs.expo.dev/versions/latest/sdk/map-view/
+
+    --> markers example from theory week 5
+        https://github.com/react-native-maps/react-native-maps
+        markers documentation: https://github.com/react-native-maps/react-native-maps/blob/master/docs/marker.md
+
+    -->	expo location documentation
+        low accuracy, low battery usage: https://docs.expo.dev/versions/latest/sdk/location/
+        high accuracy, high battery usage: Location.enableNetworkProviderAsync()
+        example project location tracking (from theory week 5):
+        https://chafikgharbi.com/expo-location-tracking/
+
+    -->	Location testing during development (using a fake location):
+        Fake GPS Location app from Google Play Store: https://www.howtogeek.com/795277/how-to-spoof-your-location-on-android/
+
+    -->	react native geolocation documentation
+        fetching user location using react-native-geolocation example
+        https://medium.com/@manzsoftech/implementation-of-map-and-fetch-current-location-using-react-native-50fed7c0c23d
+        docs: https://archive.reactnative.dev/docs/geolocation redirects you to:
+        https://github.com/michalchudziak/react-native-geolocation
+
+----------------------------------------------------------------
+MAKING A LOCATION API TO LOAD INTO MAP
+----------------------------------------------------------------
+    -->	Rendering a list of markers on a map (from theory week 5)
+h       https://github.com/react-native-maps/react-native-maps?tab=readme-ov-file
+
+----------------------------------------------------------------
+DATA PERSISTENCE (ASYNC & DATABASE STORAGE)
+----------------------------------------------------------------
+    -->	Async Storage (offline data persistence)
+        -local
+        -@react-native-async-storage/async-storage
+        -String data: JSON.stringify({test: 1}), or you can use JSON.parse(“’test’: 1”)
+        docs: https://react-native-async-storage.github.io/async-storage/docs/usage/
+
+    -->	a database i guess? (online data persistence)
+
+----------------------------------------------------------------
+FOR ADDING SPECIAL/INTERESTING FEATURES
+----------------------------------------------------------------
+    --> 	Als je het een sociale app maakt:
+        -contact personen toevoegen (moet permissie aanvragen)
+        https://docs.expo.dev/versions/latest/sdk/contacts/
+
+    -->	adding things to calender etc.:
+        -needs permission
+        https://docs.expo.dev/versions/latest/sdk/calendar/
+
+----------------------------------------------------------------
+STYLING
+----------------------------------------------------------------
+    -->	fitting content in screen
+        scrollview: https://reactnative.dev/docs/scrollview
+        safeareaview: https://reactnative.dev/docs/safeareaview
+        safeareaview guide: https://medium.com/@Srushti62/safeareaview-in-react-native-mobile-app-cc73381d444b
+
+    -->	stylize map example (scroll down)
+        https://medium.com/featurepreneur/integrating-google-maps-with-react-native-62fc8b7ecded
+
+
+----------------------------------------------------------------
+EXPO
+----------------------------------------------------------------
+    -->     starting a tunnel
+        -for this you need an expo account
+        -in terminal: login with -->     npx expo login
+        -in terminal: start expo tunnel with -->     npx expo start --tunnel
+        -might have to install @expo/ngrok
