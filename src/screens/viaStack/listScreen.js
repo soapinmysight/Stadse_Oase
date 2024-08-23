@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Text, StyleSheet, Pressable, ScrollView, View, Image, ActivityIndicator } from 'react-native';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 import useLoadingData from '../../hooks/loadLocationApi'; // Custom hook to load location data
-import Location from '../../../assets/img/Location.png'
+import Location from '../../../assets/img/oaseFromList.png'
 import favSelect from '../../../assets/img/favSelect.png';
 import fav from '../../../assets/img/fav.png';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -10,11 +10,13 @@ import setFavourites from "../../asyncStorage/setFavourites";
 import getFavourites from "../../asyncStorage/getFavourites";
 import pushFavourite from "../../asyncStorage/pushFavourite";
 import deleteFavourite from "../../asyncStorage/deleteFavourite";
-
+import { useTheme } from '../../hooks/themeProvider';
+import Header from "../../components/header";
 const ListScreen = ({ navigation, route }) => {
     const oases = useLoadingData(); // Load location data using the custom hook
     const [favouritesState, setFavouritesState] = useState([]); // State to hold the list of favorite items
-
+    const { theme } = useTheme();
+    const styles = createStyles(theme); // Create styles with the current theme
 
     useEffect(() => { // Using useEffect so code can be called on component mount
         // Function to fetch favorites from async storage
@@ -45,65 +47,73 @@ const ListScreen = ({ navigation, route }) => {
     // If the data is still loading (empty array), show a loading indicator
     if (oases.length === 0) {
         return (
-            <View>
                 <View style={styles.loaderContainer}>
+                    <Header>Lijst is aan het laden...</Header>
                     <ActivityIndicator size="large" color="pink" />
                 </View>
-            </View>
         );
     }
     // In a scrollable container: for each item in the oases array, create a card to display its details
     return (<View style={styles.container}>
+            <Header>Lijst van Stadse Oases</Header>
         <ScrollView style={styles.scroll}>
             {oases.map((item, index) => {
                 const isItemFavorite = isFavorite(item);
                 return (
                     <View key={index} style={styles.card}>
-                        <View style={styles.logos}>
-                            <Image source={require('../../../assets/img/park.png')} style={styles.logo} />
-                            <Pressable style={styles.button}
+                        <View style={styles.topCard}>
+                            <Image source={require('../../../assets/img/parkLogo.png')} style={styles.logo} />
+                            <View style={styles.titleBox}>
+                            <Text style={styles.title}>{item.Title}</Text></View>
+                            <Pressable style={styles.buttonStar}
                                        onPress={() => {
                                            isItemFavorite ? handleUnfavourite(item.id) : handleFavourite(item);
                                        }}>
+                                <View style={styles.circle}>
                                 <Image source={isItemFavorite ? favSelect : fav} style={styles.star} />
+                            </View>
                             </Pressable>
                         </View>
-                        <Text style={styles.title}>{item.Title}</Text>
                         <Text style={styles.subtitle}>This is a {item.category} in {item.neighbourhood}</Text>
                         <Text style={styles.description}>{item.description}</Text>
-                        <Text style={styles.location}> Location: ({item.latitude}, {item.longitude})</Text>
-                        <Pressable style={styles.button} onPress={() => navigation.navigate('MapScreen', { listItem: item })}>
-                            <Text style={styles.buttonText}>Zie oase op de kaart --></Text>
+                        <Pressable style={styles.buttonCard} onPress={() => navigation.navigate('MapScreen', { listItem: item })}>
+                            <Text style={styles.buttonText}>Zie deze oase op de kaart</Text>
                             <Image source={Location} style={styles.oaseLogo}/>
                         </Pressable>
                     </View>
                 );
             })}
+
         </ScrollView>
-            <Pressable onPress={() => navigation.navigate('MapScreen')} style={styles.press}>
-                <Text>Map Screen</Text>
-            </Pressable>
+            <View style={styles.pressBox}>
+                <Pressable onPress={() => navigation.navigate('MapScreen')} style={styles.press}>
+                    <Text style={styles.pressText}> Naar de Kaart</Text>
+                </Pressable>
+            </View>
         </View>
     );
 
 };
 
 // Styles
-const styles = StyleSheet.create({
-    container:{
+const createStyles = (theme) =>
+    StyleSheet.create({
+        container: {
+        backgroundColor: theme.screenBg,
         flex: 1,
     },
-    loaderContainer:{
+    loaderContainer: {
+        backgroundColor: theme.screenBg,
         flex: 1,
     },
-    scroll:{
+    scroll: {
         flex: 1,
     },
     card: {
         padding: 16,
         margin: 16,
         width: '90%',
-        backgroundColor: '#fff',
+        backgroundColor: theme.cardBg,
         borderRadius: 8,
         shadowColor: '#000',
         shadowOpacity: 0.1,
@@ -111,62 +121,100 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         elevation: 4,
     },
-    logos: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: 8,
-    },
-    logo: {
-        width: 30,
-        height: 30,
-        marginRight: 'auto',
-    },
+        topCard: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginBottom: 8,
+            flex: 1,
+        },
+        logo: {
+            width: 50,
+            height: 50,
+        },
+        titleBox: {
+            height: 50,
+            alignSelf: "stretch",
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
+        title: {
+            fontSize: 20,
+            fontWeight: 'bold',
+        },
+        buttonStar: {
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: 50,
+            height: 50,
+            backgroundColor: theme.buttonBg,
+            padding: 10,
+            borderRadius: 5,
+            marginTop: 10,
+        },
+        circle: {
+            width: 40,
+            height: 40,
+            backgroundColor: theme.circleBg,
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: 30,
+        },
     star: {
         width: 30,
         height: 30,
     },
-    itemTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 8,
-    },
+
     subtitle: {
         fontSize: 12,
-        color: '#666',
+        color: theme.underText,
         marginBottom: 4,
+        fontWeight: 'bold',
+
     },
     description: {
         fontSize: 14,
         marginBottom: 8,
+        color: theme.cardText,
     },
-    location: {
-        fontSize: 12,
-        color: '#666',
-    },
-    button: {
-        backgroundColor: '#99cb38',
-        padding: 10,
+    buttonCard: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: theme.buttonBg,
+        paddingRight: 10,
+        paddingLeft: 10,
         borderRadius: 5,
-        marginTop: 10,
         flexDirection: 'row',
+        height: 42,
+        fontWeight: 'bold',
     },
     buttonText: {
-        flex: 2,
-        marginRight: "auto",
+        fontSize: 14,
+        color: theme.buttonText,
+        marginRight: 'auto',
     },
     oaseLogo: {
-        width: 14,
-        height: 21,
-        margin: 5,
+            width: 40,
+        height: 29,
+    },
+
+    pressBox: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 5,
     },
     press: {
-        height: 50,
-        width: 150,
-        backgroundColor: 'red',
+        height: 40,
+        width: 200,
+        backgroundColor: theme.buttonBg,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10,
     },
-});
-
+        pressText: {
+            color: theme.buttonText,
+            fontSize: 14,
+            fontWeight: 'bold',
+        },
+    });
 export default ListScreen;

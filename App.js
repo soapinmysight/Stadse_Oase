@@ -27,8 +27,8 @@ function TabNav() {
 function OasesNav() {
   return ( //listscreen should be reached through button on the mapscreen
       <Stack.Navigator>
-          <Stack.Screen name="MapScreen" component={MapScreen}/>
-          <Stack.Screen name="ListScreen" component={ListScreen}/>
+          <Stack.Screen name="MapScreen" component={MapScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name="ListScreen" component={ListScreen} options={{ headerShown: false }}/>
       </Stack.Navigator>
   )
 }

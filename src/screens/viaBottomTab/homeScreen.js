@@ -4,10 +4,10 @@ import {View, Text, Button, StyleSheet} from 'react-native';
 import {useTheme} from "../../hooks/themeProvider";
 
 const HomeScreen = () => {
-    const { theme, toggleTheme } = useTheme();
+    const { theme } = useTheme();
     return (
         <View style={[styles.container, { backgroundColor: theme.screenBg }]}>
-            <Text style={[styles.text, { color: theme.headerText }]}>Homescreen</Text>
+            <Text style={[styles.text, { color: theme.headerText }]}>Welkom op Stadse Oase</Text>
 
         </View>
     );

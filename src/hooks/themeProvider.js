@@ -31,7 +31,7 @@ const themes = {
         titleText: '#1A1A1A',
         underText: '#02544E',
         cardText: '#1A1A1A',
-        buttonText: '#C1E5D8',
+        buttonText: '#02544E',
         footerText: '#02544E',
     },
 };
