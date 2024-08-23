@@ -13,27 +13,31 @@ import deleteFavourite from "../../asyncStorage/deleteFavourite";
 
 const ListScreen = ({ navigation, route }) => {
     const oases = useLoadingData(); // Load location data using the custom hook
-    const [favouritesState, setFavouritesState] = useState([]);
+    const [favouritesState, setFavouritesState] = useState([]); // State to hold the list of favorite items
 
-    useEffect(() => {
+
+    useEffect(() => { // Using useEffect so code can be called on component mount
+        // Function to fetch favorites from async storage
         const fetchFavourites = async () => {
-            const oases = await getFavourites();
-            setFavouritesState(oases);
+            const savedFavourites = await getFavourites();  // Get favorites from storage and store in savedFavourites
+            setFavouritesState(savedFavourites); // Update state with fetched favorites
         };
-
-        fetchFavourites();
+        fetchFavourites(); // Call the function to fetch favorites on component mount
     }, []);
 
+    // Function to handle adding an item to favorites
     const handleFavourite = async (oase) => {
-        await pushFavourite(oase);
-        setFavouritesState(await getFavourites());
+        await pushFavourite(oase); // Add the item to favorites
+        setFavouritesState(await getFavourites()); // Update state with the new list of favorites
     };
 
+    // Function to handle removing an item from favorites
     const handleUnfavourite = async (oaseId) => {
-        await deleteFavourite(oaseId);
-        setFavouritesState(await getFavourites());
+        await deleteFavourite(oaseId); // Remove the item from favorites
+        setFavouritesState(await getFavourites()); // Update state with the new list of favorites
     };
 
+    // Function to check if an item is in the favorites list
     const isFavorite = (oase) => {
         return favouritesState.some(fav => fav.id === oase.id);
     };

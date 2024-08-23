@@ -3,7 +3,6 @@ import getFavourites from "./getFavourites";
 import setFavourites from "./setFavourites";
 
 // Function to remove a favorite oase from the list by its ID
-
 const deleteFavourite = async (oaseId) => {
     try {
         // Get the current list of favorites
