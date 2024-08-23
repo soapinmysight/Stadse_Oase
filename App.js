@@ -10,7 +10,7 @@ import MapScreen from "./src/screens/viaStack/mapScreen";
 import SetScreen from "./src/screens/viaBottomTab/setScreen";
 import ListScreen from "./src/screens/viaStack/listScreen";
 // import StackNav from "./src/screens/StackNav";
-
+import { ThemeProvider } from './src/hooks/themeProvider';
 const Tab = createMaterialBottomTabNavigator()
 const Stack = createStackNavigator()
 
@@ -35,11 +35,13 @@ function OasesNav() {
 
 const App = () => {
   return (
+      <ThemeProvider>
       <SafeAreaProvider>
         <NavigationContainer>
           <TabNav/>
         </NavigationContainer>
       </SafeAreaProvider>
+      </ThemeProvider>
           );
 };
 
