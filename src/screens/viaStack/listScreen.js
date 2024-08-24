@@ -54,7 +54,8 @@ const ListScreen = ({ navigation, route }) => {
         );
     }
     // In a scrollable container: for each item in the oases array, create a card to display its details
-    return (<View style={styles.container}>
+    return (
+    <View style={styles.container}>
             <Header>Lijst van Stadse Oases</Header>
         <ScrollView style={styles.scroll}>
             {oases.map((item, index) => {
