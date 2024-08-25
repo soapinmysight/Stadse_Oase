@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 const useLoadingData = () => {
     // State to store the location data
     const [locationData, setLocationData] = useState([]);
-
     // API URL to fetch the location data
     const API_URL =
         "https://raw.githubusercontent.com/soapinmysight/bezigeBijtjes/master/assets/api/locationData.json";

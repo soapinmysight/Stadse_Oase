@@ -36,6 +36,7 @@ const themes = {
     },
 };
 // Create a context for the theme so it can be accessed globally in the app
+
 const ThemeContext = createContext();
 
 // Define a provider component to manage the theme state

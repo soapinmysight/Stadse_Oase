@@ -7,6 +7,8 @@ import Card from "../../components/card"  // Import Header component so we can u
 
 const SetScreen = () => {
     const { theme, toggleTheme } = useTheme(); // Get theme for styling and toggleTheme function to toggle the theme
+    const styles = createStyles(theme); // Create styles with the current theme
+
     return (
         <View style={styles.container}>
             <Header>Settings</Header>

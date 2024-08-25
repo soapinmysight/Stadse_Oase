@@ -11,11 +11,9 @@ const Card = ({ children }) => {
     const styles = createStyles(theme);
     return (
         <View style={styles.cardContainer}>
-
         <View style={styles.card}>
             {children}
         </View>
-
             </View>
     );
 };
