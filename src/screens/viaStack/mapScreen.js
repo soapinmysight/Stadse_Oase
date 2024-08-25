@@ -15,13 +15,17 @@ import {useTheme} from "../../hooks/themeProvider";
 import Header from "../../components/header";
 
 const MapScreen = ({ navigation, route }) => {
-    const locationData = useLoadingData(); // To store location data
-    const [location, setLocation] = useState(null); // Load data using custom hook
+    const locationData = useLoadingData(); // To store oase location data from hook
+
+    const [location, setLocation] = useState(null); // State for user location
     const [errorMsg, setErrorMsg] = useState(null); // State for any user location-related error messages
+
     const listItem = route.params?.listItem; // If key "listItem" exists, access value (item) from route.params, and give it the name "listItem"
     console.log(`this is the ListItem${listItem}`)
+
     const { theme } = useTheme();
     const styles = createStyles(theme); // Create styles with the current theme
+
     // Effect to ask permission for and get user's location
     useEffect(() => {
         const getLocation = async () => {
@@ -31,7 +35,7 @@ const MapScreen = ({ navigation, route }) => {
                 setErrorMsg('Permission to access location was denied');
             } else { // Else start watching the user's location
                 await Location.watchPositionAsync(
-                    { accuracy: Accuracy.Balanced }, // Set accuracy level for location updates
+                    { accuracy: Accuracy.High }, // Set accuracy level for location updates
                     (coords) => {setLocation(coords); // Update location state with the new coordinates
                     });
             }

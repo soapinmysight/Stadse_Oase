@@ -35,7 +35,7 @@ const HomeScreen = () => {
           if (currentNeersl === 0) { // If it is currently dry
             const nextNonZeroNeersl = uurVerw.find(hour => hour.neersl !== 0); // Find the next hour with rain
             if (nextNonZeroNeersl) {
-              weatherLog = `Het is nu droog. Ga wandelen voordat het gaat regen om ${getHourFromDateTime(nextNonZeroNeersl.uur)}!`; //Store message
+              weatherLog = `Het is nu droog. Ga wandelen voordat het gaat regenen om ${getHourFromDateTime(nextNonZeroNeersl.uur)}!`; //Store message
             } else { // Else, if it doesnt rain the whole day
               weatherLog = 'Vandaag is het heel de dag droog. Heerlijk, je kan heel de dag naar buiten!'; //Store message
             }
