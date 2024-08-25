@@ -3,13 +3,11 @@ import 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
-// import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {createMaterialBottomTabNavigator} from "react-native-paper/react-navigation";
 import HomeScreen from "./src/screens/viaBottomTab/homeScreen";
 import MapScreen from "./src/screens/viaStack/mapScreen";
 import SetScreen from "./src/screens/viaBottomTab/setScreen";
 import ListScreen from "./src/screens/viaStack/listScreen";
-// import StackNav from "./src/screens/StackNav";
 import { ThemeProvider } from './src/hooks/themeProvider';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const Tab = createMaterialBottomTabNavigator()

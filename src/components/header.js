@@ -2,6 +2,9 @@ import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 import { useTheme } from '../hooks/themeProvider';
 
+// Component for Header
+// Children so that content can be put in the screen of the page where we use the component
+// Mostly to keep styling uniform
 
 const Header = ({ children }) => {
     const { theme } = useTheme();
