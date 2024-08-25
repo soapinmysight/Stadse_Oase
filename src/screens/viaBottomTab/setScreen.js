@@ -2,16 +2,20 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, Button} from 'react-native';
 import { useTheme } from '../../hooks/themeProvider';
-
+import Header from "../../components/header";
+import Card from "../../components/card"
 
 const SetScreen = () => {
     const { theme, toggleTheme } = useTheme();
     return (
         <View style={[styles.container, { backgroundColor: theme.screenBg }]}>
-            <Text style={[styles.text, { color: theme.headerText }]}>Verander hier je settings</Text>
-            <Button title="Toggle Theme"
+            <Header>Settings</Header>
+            <Card>
+            <Text style={[styles.text, { color: theme.titleText }]}>Verander hier je thema naar dark of light mode</Text>
+            <Button title="Verander Thema"
                     onPress={toggleTheme}
                     color= {theme.buttonBg}/>
+            </Card>
         </View>
     );
 

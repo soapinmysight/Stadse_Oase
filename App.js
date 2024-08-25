@@ -11,21 +11,52 @@ import SetScreen from "./src/screens/viaBottomTab/setScreen";
 import ListScreen from "./src/screens/viaStack/listScreen";
 // import StackNav from "./src/screens/StackNav";
 import { ThemeProvider } from './src/hooks/themeProvider';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const Tab = createMaterialBottomTabNavigator()
 const Stack = createStackNavigator()
 
+// Function that sets up the bottom tab navigation
+// Linking stack navigator through the oases tab
 function TabNav() {
   return (
   <Tab.Navigator>
-    <Tab.Screen name="Home" component={HomeScreen}/>
-      <Tab.Screen name="Oases" component={OasesNav}/>
-    <Tab.Screen name="Settings" component={SetScreen}/>
+    <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+            tabBarLabel: 'Home',
+            tabBarIcon: ({ color }) => (
+                <Icon name="home" color={color} size={24} />
+            ),
+        }}/>
+      <Tab.Screen
+          name="Oases"
+          component={OasesNav}
+          options={{
+              tabBarLabel: 'Oases',
+              tabBarIcon: ({ color }) => (
+                  <Icon name="map" color={color} size={24} />
+              ),
+          }}
+      />
+    <Tab.Screen
+        name="Settings"
+        component={SetScreen}
+        options={{
+            tabBarLabel: 'Settings',
+            tabBarIcon: ({ color }) => (
+                <Icon name="cog" color={color} size={24} />
+            ),
+        }}
+    />
   </Tab.Navigator>
   );
 }
 
+// Function that sets up the stack navigation for the Oases tab
+// So MapScreen and ListScreen can be reached
 function OasesNav() {
-  return ( //listscreen should be reached through button on the mapscreen
+  return (
       <Stack.Navigator>
           <Stack.Screen name="MapScreen" component={MapScreen} options={{ headerShown: false }}/>
           <Stack.Screen name="ListScreen" component={ListScreen} options={{ headerShown: false }}/>
@@ -33,6 +64,8 @@ function OasesNav() {
   )
 }
 
+// Main app component, wrapped in themeProvider
+// With TabNAv as main navigation
 const App = () => {
   return (
       <ThemeProvider>

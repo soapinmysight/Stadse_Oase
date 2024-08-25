@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Header from "../../components/header";
+import Card from "../../components/card";
 import { useTheme } from '../../hooks/themeProvider';
 
 const HomeScreen = () => {
@@ -59,13 +60,11 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
             <Header>Welkom op de Stadse Oase App</Header>
-      <View style={styles.body}>
-                    <View style={styles.card}>
+          <Card>
                       <Text style={styles.title}>{weatherMessage}</Text>
                       <Text style={styles.subtitle}>Missen je wandelingen iets?</Text>
                       <Text style={styles.description}>Bekijk de kaart en lijst vol Rotterdamse Oases!</Text>
-                    </View>
-      </View>
+          </Card>
         </View>
   );
 };
@@ -80,25 +79,6 @@ const createStyles = (theme) =>
         flex: 1,
     },
 
-      body:{
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex: 1,
-
-      },
-
-    card: {
-        padding: 16,
-        margin: 16,
-        width: '90%',
-        backgroundColor: theme.cardBg,
-        borderRadius: 8,
-        shadowColor: '#000',
-        shadowOpacity: 0.1,
-        shadowRadius: 8,
-        shadowOffset: { width: 0, height: 2 },
-        elevation: 4,
-    },
     title: {
         fontSize: 20,
         fontWeight: 'bold',
