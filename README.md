@@ -1,1 +1,1 @@
-<p align="center"><img src="./assets/StadseOase.png" height="400"></p>
+<p align="center"><img src="./assets/StadseOase.png" height="600"></p>
