@@ -1,0 +1,134 @@
+[
+  {
+    "id": "1",
+    "Title": "Vroesenpark",
+    "longitude": 4.464392,
+    "latitude": 51.932857,
+    "category": "park",
+    "neighbourhood": "Blijdorp",
+    "logo": "https://raw.githubusercontent.com/soapinmysight/bezigeBijtjes/main/assets/img/logo/park.png",
+    "shortDescription": "Spacious green park with playground",
+    "description": "Vroesenpark is a large urban park offering green spaces, a playground, and picnic areas. It is popular for outdoor activities and community events."
+  },
+  {
+    "id": "2",
+    "Title": "Het Park",
+    "longitude": 4.475517,
+    "latitude": 51.909678,
+    "category": "park",
+    "neighbourhood": "Scheepvaartkwartier",
+    "logo": "https://raw.githubusercontent.com/soapinmysight/bezigeBijtjes/main/assets/img/logo/park.png",
+    "shortDescription": "Historic park with views",
+    "description": "Het Park, located near the Euromast, is a historic park offering scenic views, walking paths, and serene spots for relaxation and leisure."
+  },
+  {
+    "id": "3",
+    "Title": "Kralingse Bos",
+    "longitude": 4.515080,
+    "latitude": 51.935798,
+    "category": "park",
+    "neighbourhood": "Kralingen",
+    "logo": "https://raw.githubusercontent.com/soapinmysight/bezigeBijtjes/main/assets/img/logo/park.png",
+    "shortDescription": "Large forest park with lake",
+    "description": "Kralingse Bos is a vast forested park featuring a lake, beaches, and various recreational facilities. It is ideal for outdoor sports and family outings."
+  },
+  {
+    "id": "4",
+    "Title": "Zuiderpark",
+    "longitude": 4.484109,
+    "latitude": 51.882155,
+    "category": "park",
+    "neighbourhood": "Charlois",
+    "logo": "https://raw.githubusercontent.com/soapinmysight/bezigeBijtjes/main/assets/img/logo/park.png",
+    "shortDescription": "Expansive park with sports facilities",
+    "description": "Zuiderpark is an extensive park with sports facilities, playgrounds, and green spaces. It hosts various events and is a hub for community activities."
+  },
+  {
+    "id": "5",
+    "Title": "Plaswijckpark",
+    "longitude": 4.485681,
+    "latitude": 51.949553,
+    "category": "park",
+    "neighbourhood": "Hillegersberg-Schiebroek",
+    "logo": "https://raw.githubusercontent.com/soapinmysight/bezigeBijtjes/main/assets/img/logo/park.png",
+    "shortDescription": "Family park with attractions",
+    "description": "Plaswijckpark is a family-oriented park offering a range of attractions, including playgrounds, petting zoos, and boat rides, making it perfect for a family day out."
+  },
+  {
+    "id": "6",
+    "Title": "Lage Bergse Bos",
+    "longitude": 4.511948,
+    "latitude": 51.978254,
+    "category": "park",
+    "neighbourhood": "Hillegersberg-Schiebroek",
+    "logo": "https://raw.githubusercontent.com/soapinmysight/bezigeBijtjes/main/assets/img/logo/park.png",
+    "shortDescription": "Natural park with walking trails",
+    "description": "Lage Bergse Bos is a natural park featuring extensive walking and cycling trails, water bodies, and picnic spots, ideal for nature lovers."
+  },
+  {
+    "id": "7",
+    "Title": "Het Park bij de Euromast",
+    "longitude": 4.475695,
+    "latitude": 51.905857,
+    "category": "park",
+    "neighbourhood": "Scheepvaartkwartier",
+    "logo": "https://raw.githubusercontent.com/soapinmysight/bezigeBijtjes/main/assets/img/logo/park.png",
+    "shortDescription": "Scenic park near the Euromast",
+    "description": "Het Park bij de Euromast is a picturesque park near the Euromast tower, offering beautiful views of Rotterdam skyline and green spaces for leisure activities."
+  },
+  {
+    "id": "8",
+    "Title": "Museumpark",
+    "longitude": 4.473881,
+    "latitude": 51.911820,
+    "category": "park",
+    "neighbourhood": "Museumkwartier",
+    "logo": "https://raw.githubusercontent.com/soapinmysight/bezigeBijtjes/main/assets/img/logo/park.png",
+    "shortDescription": "Cultural park with museums",
+    "description": "Museumpark is a cultural hub featuring museums, sculptures, and gardens. It offers a blend of art, history, and natural beauty in the heart of Rotterdam."
+  },
+  {
+    "id": "9",
+    "Title": "Roel Langerakpark",
+    "longitude": 4.498162,
+    "latitude": 51.928794,
+    "category": "park",
+    "neighbourhood": "Overschie",
+    "logo": "https://raw.githubusercontent.com/soapinmysight/bezigeBijtjes/main/assets/img/logo/park.png",
+    "shortDescription": "Park with sports fields and water features",
+    "description": "Roel Langerakpark is a recreational park with sports fields, playgrounds, and water features. It provides ample space for outdoor activities and community gatherings."
+  },
+  {
+    "id": "10",
+    "Title": "Het Dakpark",
+    "longitude": 4.441949,
+    "latitude": 51.897492,
+    "category": "park",
+    "neighbourhood": "Delfshaven",
+    "logo": "https://raw.githubusercontent.com/soapinmysight/bezigeBijtjes/main/assets/img/logo/park.png",
+    "shortDescription": "Urban rooftop park with gardens",
+    "description": "Het Dakpark is an innovative urban park situated on a rooftop, featuring gardens, walking paths, and panoramic views of Rotterdam. It offers a unique green space experience."
+  },
+  {
+    "id": "11",
+    "Title": "Park Schoonoord",
+    "longitude": 4.471693,
+    "latitude": 51.933879,
+    "category": "park",
+    "neighbourhood": "Bergpolder",
+    "logo": "https://raw.githubusercontent.com/soapinmysight/bezigeBijtjes/main/assets/img/logo/park.png",
+    "shortDescription": "Peaceful park with historic features",
+    "description": "Park Schoonoord is a tranquil park with historic features, including a windmill and gardens. It provides a serene environment for relaxation and quiet walks."
+  },
+  {
+    "id": "12",
+    "Title": "Hefpark",
+    "longitude": 4.490956,
+    "latitude": 51.905498,
+    "category": "park",
+    "neighbourhood": "Feijenoord",
+    "logo": "https://raw.githubusercontent.com/soapinmysight/bezigeBijtjes/main/assets/img/logo/park.png",
+    "shortDescription": "Park with historic railway bridge",
+    "description": "Hefpark is a park known for its historic railway bridge, providing a unique backdrop for leisure activities and scenic walks in the Feijenoord neighborhood."
+  }
+]
